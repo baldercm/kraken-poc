@@ -1,0 +1,6 @@
+--recursive
+--compilers coffee:coffee-script/register
+--ui bdd
+--reporter spec
+--check-leaks
+--timeout 6000

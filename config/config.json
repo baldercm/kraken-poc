@@ -1,31 +1,26 @@
 {
 
-    
+  "middleware": {
 
-    "middleware": {
+    "static": {
+      "module": {
+        "arguments": [ "path:./.build" ]
+      }
+    },
 
-        "static": {
-            "module": {
-                "arguments": [ "path:./.build" ]
-            }
-        }
+    "router": {
+      "module": {
+        "arguments": [{ "directory": "path:./controllers" }]
+      }
+    },
 
-        ,"router": {
-            "module": {
-                "arguments": [{ "directory": "path:./controllers" }]
-            }
-        }
-
-        
-        ,"expressView": {
-            "priority": 100,
-            "enabled": true,
-            "module": {
-                "name": "engine-munger/lib/expressView"
-            }
-        }
-        
-
-        
+    "expressView": {
+      "priority": 100,
+      "enabled": true,
+      "module": {
+        "name": "engine-munger/lib/expressView"
+      }
     }
+
+  }
 }

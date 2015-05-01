@@ -38,14 +38,13 @@ function find(req, res) {
 }
 
 function findAll(req, res) {
-  res.status(200).json({status:'ok'});
-  //Place.find({}).exec()
-  //  .then(function(places) {
-  //    res.status(200).json(places);
-  //  }, function(err) {
-  //    res.status(400).json({ error: err });
-  //  })
-  //  .end();
+  Place.find({}).exec()
+    .then(function(places) {
+      res.status(200).json(places);
+    }, function(err) {
+      res.status(400).json({ error: err });
+    })
+    .end();
 }
 
 function findByMajorId(req, res) {

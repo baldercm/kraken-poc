@@ -27,6 +27,9 @@
     // Whether Dojo Toolkit globals should be predefined.
     "dojo": false,
 
+    // Whether the standard Mocha globals should be predefined.
+    "mocha": true,
+
     // Custom predefined globals.
     "predef": [],
 

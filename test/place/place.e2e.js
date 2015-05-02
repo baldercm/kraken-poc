@@ -8,7 +8,7 @@ var
   expect = require('chai').expect,
   Place = require('../../models/place-model').Place;
 
-describe('/places', function () {
+describe('Places E2E', function () {
   var mock;
   var places = [];
 

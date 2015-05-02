@@ -1,10 +1,13 @@
 'use strict';
 
+var path = require('path');
+var confit = require('confit');
 var database = require('../lib/database');
 
 before(function() {
-  database.bootstrap({
-    dbUri: 'mongodb://localhost/noderest-e2e'
+  var basedir = path.join(__dirname, '../config');
+  confit(basedir).create(function (err, config) {
+    database.bootstrap(config.get('mongodb'));
   });
 });
 

@@ -6,7 +6,7 @@ var kraken = require('kraken-js'),
   request = require('supertest');
 
 
-describe('/', function () {
+describe('Index E2E', function () {
 
   var app, mock;
 

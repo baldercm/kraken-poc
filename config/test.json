@@ -1,0 +1,7 @@
+{
+
+  "mongodb": {
+    "dbUri": "mongodb://localhost/noderest-e2e"
+  }
+
+}

@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "jshint": "jshint --verbose ./controllers ./models ./test",
-    "test": "mocha"
+    "pretest": "npm run jshint && mongo noderest-e2e scripts/preparedb.js",
+    "test": "NODE_ENV=test mocha"
   },
   "dependencies": {
     "coffee-script": "^1.9.2",

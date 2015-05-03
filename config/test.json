@@ -2,6 +2,12 @@
 
   "mongodb": {
     "dbUri": "mongodb://localhost/noderest-e2e"
+  },
+
+  "middleware": {
+    "logger": {
+      "enabled": false
+    }
   }
 
 }

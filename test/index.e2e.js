@@ -1,30 +1,20 @@
 'use strict';
 
 
-var kraken = require('kraken-js'),
-  express = require('express'),
-  request = require('supertest');
+var request = require('supertest');
+var server = require('./server.e2e');
 
 
 describe('Index E2E', function () {
 
-  var app, mock;
+  var mock;
 
-
-  beforeEach(function (done) {
-    app = express();
-    app.on('start', done);
-    app.use(kraken({
-      basedir: process.cwd()
-    }));
-
-    mock = app.listen(1337);
-
+  beforeEach(function(done) {
+    mock = server.startup(done);
   });
 
-
-  afterEach(function (done) {
-    mock.close(done);
+  afterEach(function(done) {
+    server.shutdown(mock, done);
   });
 
 

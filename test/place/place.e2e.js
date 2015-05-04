@@ -2,70 +2,51 @@
 
 var
   _ = require('underscore'),
-  kraken = require('kraken-js'),
-  express = require('express'),
   request = require('supertest'),
   expect = require('chai').expect,
-  Place = require('../../models/place-model').Place;
+  Place = require('../../models/place-model').Place,
+  server = require('../server.e2e');
 
 describe('Places E2E', function () {
-  var mock;
   var places = [];
+  var mock;
 
-  beforeEach(function (done) {
-    var app = express();
-    app.on('start', done);
-    app.use(kraken({
-      basedir: process.cwd()
-    }));
-
-    mock = app.listen(1337);
-  });
-
-
-  afterEach(function (done) {
-    mock.close(done);
+  before(function(done) {
+    mock = server.startup(done);
   });
 
   before(function(done) {
     Place.create(
       {
-        name : 'Place 1',
+        name: 'Place 1',
         location: [40.00, 30.00],
-        placePhotos : [
-          {
-            thumbnails : [
-              {
-                imageURL : 'anyValidUrl',
-                thumbnailSize : 'SMALL'
-              }
-            ],
-            imageURL : 'anyValidUrl',
-            imageFileIdentifier : 'imageFileId',
-            name : 'MAIN'
-          }
-        ],
         beaconDevice : {
           majorId : '1234',
           minorId : '2345'
         }
       },
       { name: 'Place 2', location: [40.00, 30.00] },
-      { name: 'Place 3', location: [40.00, 30.00] },
-      { name: 'Place 4', location: [55.00, 55.00] },
-      function(err, place1, place2, place3, place4) {
+      { name: 'Place 3', location: [55.00, 55.00] },
+      function(err, place1, place2, place3) {
         if (err) {
           throw err;
         } else {
           places.push(place1);
           places.push(place2);
           places.push(place3);
-          places.push(place4);
 
           done();
         }
       }
     );
+  });
+
+  after(function(done) {
+    Place.remove({}, done);
+  });
+
+  after(function(done) {
+    server.shutdown(mock, done);
   });
 
   describe('/places/:id', function() {
@@ -115,7 +96,7 @@ describe('Places E2E', function () {
             expect(res.status).to.equal(200);
             expect(res.type).to.match(/json/);
             expect(res.body).to.be.instanceof(Array);
-            expect(res.body.length).to.equal(4);
+            expect(res.body.length).to.equal(3);
           })
           .end(done);
       });
@@ -134,11 +115,11 @@ describe('Places E2E', function () {
             expect(res.status).to.equal(200);
             expect(res.type).to.match(/json/);
             expect(res.body).to.be.instanceof(Array);
-            expect(res.body.length).to.equal(3);
+            expect(res.body.length).to.equal(2);
 
             var placeNames = _.pluck(res.body, 'name');
-            expect(placeNames).to.include.members(['Place 1', 'Place 2', 'Place 3']);
-            expect(placeNames).not.to.include.members(['Place 4']);
+            expect(placeNames).to.include.members(['Place 1', 'Place 2']);
+            expect(placeNames).not.to.include.members(['Place 3']);
           })
           .end(done);
       });

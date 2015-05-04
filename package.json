@@ -5,13 +5,12 @@
   "author": "baldercm@gmail.com",
   "main": "index.js",
   "scripts": {
-    "jshint": "jshint --verbose ./controllers ./models ./test",
+    "jshint": "jshint --verbose ./controllers ./lib ./models ./test",
     "pretest": "npm run jshint && mongo noderest-e2e scripts/preparedb.js",
     "test": "NODE_ENV=test mocha"
   },
   "dependencies": {
     "coffee-script": "^1.9.2",
-    "confit": "^2.0.3",
     "engine-munger": "^0.2.0",
     "express": "^4.3.0",
     "kraken-devtools": "^1.0.0",

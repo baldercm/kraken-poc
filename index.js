@@ -3,25 +3,10 @@
 var express = require('express');
 var kraken = require('kraken-js');
 var database = require('./lib/database');
+var options = require('./lib/options');
 
-var options, app;
+var app;
 
-/*
- * Create and configure application. Also exports application instance for use by tests.
- * See https://github.com/krakenjs/kraken-js#options for additional configuration options.
- */
-options = {
-  onconfig: function (config, next) {
-    /*
-     * Add any additional config setup or overrides here. `config` is an initialized
-     * `confit` (https://github.com/krakenjs/confit/) configuration object.
-     */
-
-    database.bootstrap(config.get('mongodb'));
-
-    next(null, config);
-  }
-};
 
 app = module.exports = express();
 app.use(kraken(options));

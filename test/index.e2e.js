@@ -22,8 +22,8 @@ describe('Index E2E', function () {
     request(mock)
       .get('/')
       .expect(200)
-      .expect('Content-Type', /html/)
-      .expect(/"name": "index"/)
+      .expect('Content-Type', /json/)
+      .expect(/"name":"index"/)
       .end(function (err, res) {
         done(err);
       });

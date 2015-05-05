@@ -1,0 +1,10 @@
+{
+  "ext": "js coffee json",
+  "ignore": [
+    ".build",
+    ".git",
+    "node_modules",
+    "public",
+    "tasks"
+  ]
+}

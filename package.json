@@ -16,7 +16,6 @@
     "express": "^4.3.0",
     "kraken-devtools": "^1.0.0",
     "kraken-js": "^1.0.1",
-    "localizr": "^1.0.5",
     "mongoose": "^4.0.2",
     "pine": "^1.1.0",
     "underscore": "^1.8.3"
@@ -29,7 +28,6 @@
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-jshint": "^0.11.2",
     "grunt-copy-to": "0.0.12",
-    "grunt-localizr": "^0.2.2",
     "grunt-mocha-cli": "^1.13.0",
     "istanbul": "^0.3.13",
     "jshint": "^2.7.0",

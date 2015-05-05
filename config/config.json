@@ -8,6 +8,16 @@
       }
     },
 
+    "appsec": {
+      "module": {
+        "arguments": [
+          {
+            "csrf": false
+          }
+        ]
+      }
+    },
+
     "router": {
       "module": {
         "arguments": [{ "directory": "path:./controllers" }]

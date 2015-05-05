@@ -7,7 +7,8 @@
   "scripts": {
     "jshint": "jshint --verbose ./controllers ./lib ./models ./test",
     "pretest": "npm run jshint && mongo noderest-e2e scripts/preparedb.js",
-    "test": "NODE_ENV=test mocha"
+    "test": "NODE_ENV=test mocha",
+    "test-cov": "rm -Rf coverage && NODE_ENV=test istanbul cover node_modules/mocha/bin/_mocha"
   },
   "dependencies": {
     "coffee-script": "^1.9.2",

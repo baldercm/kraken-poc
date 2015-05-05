@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "coffee-script": "^1.9.2",
-    "engine-munger": "^0.2.0",
     "express": "^4.3.0",
     "kraken-devtools": "^1.0.0",
     "kraken-js": "^1.0.1",

@@ -2,10 +2,12 @@
 
   "middleware": {
 
+    "favicon": {
+      "enabled": false
+    },
+
     "static": {
-      "module": {
-        "arguments": [ "path:./.build" ]
-      }
+      "enabled": false
     },
 
     "appsec": {

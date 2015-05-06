@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "description": "Kraken PoC",
   "author": "baldercm@gmail.com",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "jshint": "jshint --verbose ./controllers ./lib ./models ./test",
-    "pretest": "npm run jshint && mongo noderest-e2e scripts/preparedb.js",
-    "test": "NODE_ENV=test mocha",
-    "test-cov": "rm -Rf coverage && NODE_ENV=test istanbul cover node_modules/mocha/bin/_mocha"
+    "start": "make start",
+    "test": "make test",
+    "coverage": "make coverage"
   },
   "dependencies": {
     "coffee-script": "^1.9.2",
@@ -22,12 +21,6 @@
   "devDependencies": {
     "chai": "^2.3.0",
     "chai-as-promised": "^5.0.0",
-    "grunt": "^0.4.5",
-    "grunt-config-dir": "^0.3.2",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-jshint": "^0.11.2",
-    "grunt-copy-to": "0.0.12",
-    "grunt-mocha-cli": "^1.13.0",
     "istanbul": "^0.3.13",
     "jshint": "^2.7.0",
     "mocha": "^2.2.4",

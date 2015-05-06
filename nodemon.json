@@ -3,8 +3,11 @@
   "ignore": [
     ".build",
     ".git",
+    "coverage",
     "node_modules",
     "public",
-    "tasks"
+    "scripts",
+    "test",
+    "nodemon.json"
   ]
 }

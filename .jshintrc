@@ -31,7 +31,9 @@
   "mocha": true,
 
   // Custom predefined globals.
-  "predef": [],
+  "predef": [
+    "context"
+  ],
 
   // Development
 

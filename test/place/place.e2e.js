@@ -51,7 +51,7 @@ describe('Places E2E', function () {
 
   describe('GET /places/:id', function() {
 
-    describe('on valid id', function() {
+    context('on valid id', function() {
       it('should get the place', function(done) {
         var place = places[0];
 
@@ -69,7 +69,7 @@ describe('Places E2E', function () {
       });
     });
 
-    describe('on wrong id', function() {
+    context('on wrong id', function() {
       it('should get an error', function(done) {
         request(mock)
           .get('/places/anyWrongId')
@@ -86,7 +86,7 @@ describe('Places E2E', function () {
 
   describe('GET /places', function() {
 
-    describe('on empty query', function() {
+    context('on empty query', function() {
       it('should get all places', function(done) {
         request(mock)
           .get('/places')
@@ -105,7 +105,7 @@ describe('Places E2E', function () {
 
   describe('GET /places?latitude=1.23&longitude=2.34', function() {
 
-    describe('on valid query', function() {
+    context('on valid query', function() {
       it('should get geonear places', function(done) {
         request(mock)
           .get('/places?latitude=40.00&longitude=30.00')
@@ -125,7 +125,7 @@ describe('Places E2E', function () {
       });
     });
 
-    describe('on invalid query', function() {
+    context('on invalid query', function() {
       it('should get an error', function(done) {
         request(mock)
           .get('/places?latitude=invalid&longitude=invalid')
@@ -142,7 +142,7 @@ describe('Places E2E', function () {
 
   describe('GET /places?beaconMajorId=1234', function() {
 
-    describe('on valid query', function() {
+    context('on valid query', function() {
       it('should get the place with the beacon majorId', function(done) {
         request(mock)
           .get('/places?beaconMajorId=1234')
@@ -162,7 +162,7 @@ describe('Places E2E', function () {
       });
     });
 
-    describe('on wrong majorId', function() {
+    context('on wrong majorId', function() {
       it('should get an empty array', function(done) {
         request(mock)
           .get('/places?beaconMajorId=invalid')
@@ -181,7 +181,7 @@ describe('Places E2E', function () {
 
   describe('POST /places', function() {
 
-    describe('on valid query', function() {
+    context('on valid query', function() {
       it('should get the place with the beacon majorId', function(done) {
         request(mock)
           .get('/places?beaconMajorId=1234')
@@ -201,7 +201,7 @@ describe('Places E2E', function () {
       });
     });
 
-    describe('on wrong majorId', function() {
+    context('on wrong majorId', function() {
       it('should get an empty array', function(done) {
         request(mock)
           .post('/places')

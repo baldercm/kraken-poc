@@ -16,10 +16,8 @@ function serverStartup(done) {
   return app.listen(1337);
 }
 
-function serverShutdown(server, done) {
-  database.shutdown();
-  server.close(done);
-}
+after(function(done) {
+  database.shutdown(done);
+});
 
 module.exports.startup = serverStartup;
-module.exports.shutdown = serverShutdown;

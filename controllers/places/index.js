@@ -1,17 +1,31 @@
 'use strict';
 
 var _ = require('underscore');
-var Place = require('../models/place-model').Place;
+var log = require('pine')();
+var Place = require('../../models/place-model').Place;
 
-var placeApi = {
-  findById: findById,
-  find: find,
-  findAll: findAll,
-  findAround: findAround,
-  findByMajorId: findByMajorId
+module.exports = function(router) {
+  router.get('/', find);
+  router.post('/', create);
+  router.get('/:id', findById);
 };
 
-module.exports.api = placeApi;
+function create(req, res) {
+  Place.create({
+    name : req.body.name,
+    location: [req.body.latitude, req.body.longitude],
+    beaconDevice : {
+      majorId : req.body.beaconDevice.majorId,
+      minorId : req.body.beaconDevice.minorId
+    }
+  })
+    .then(function(place) {
+      res.status(200).json({id: place.id});
+    }, function(err) {
+      res.status(400).json({ error: err });
+    })
+    .end();
+}
 
 function findById(req, res) {
   Place.findById(req.params.id).exec()
@@ -66,6 +80,7 @@ function findAround(req, res) {
     .then(function(places) {
       res.status(200).json(_.pluck(places, 'obj'));
     }, function(err) {
+      log.error(err.message);
       res.status(400).json({ error: err });
     })
     .end();

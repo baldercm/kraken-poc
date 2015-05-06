@@ -14,7 +14,7 @@ describe('Index E2E', function () {
   });
 
   afterEach(function(done) {
-    server.shutdown(mock, done);
+    mock.close(done);
   });
 
 

@@ -5,7 +5,6 @@
     ".git",
     "coverage",
     "node_modules",
-    "public",
     "scripts",
     "test",
     "nodemon.json"

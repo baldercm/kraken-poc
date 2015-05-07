@@ -12,6 +12,9 @@ start:
 test: pretest
 	NODE_ENV=test $(NODE_MODULES)/mocha
 
+dev: pretest
+	NODE_ENV=test $(NODE_MODULES)/nodemon --exec $(NODE_MODULES)/mocha --reporter min
+
 coverage: pretest
 	rm -Rf coverage
 	NODE_ENV=test $(NODE_MODULES)/istanbul cover $(NODE_MODULES)/_mocha

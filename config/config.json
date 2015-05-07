@@ -1,5 +1,16 @@
 {
 
+  "log": {
+    "main": {
+      "console": {
+        "level": "debug"
+      },
+      "file": {
+        "level": "info"
+      }
+    }
+  },
+
   "middleware": {
 
     "favicon": {

@@ -1,5 +1,13 @@
 {
 
+  "log": {
+    "main": {
+      "console": {
+        "level": "silent"
+      }
+    }
+  },
+
   "mongodb": {
     "dbUri": "mongodb://localhost/noderest-e2e"
   },

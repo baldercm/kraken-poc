@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('underscore');
-var log = require('pine')();
+var log = require('winston').loggers.get('main');
 var Place = require('../../models/place-model').Place;
 
 module.exports = function(router) {
@@ -11,14 +11,16 @@ module.exports = function(router) {
 };
 
 function create(req, res) {
-  Place.create({
-    name : req.body.name,
+  var newPlace = {
+    name: req.body.name,
     location: [req.body.latitude, req.body.longitude],
-    beaconDevice : {
-      majorId : req.body.beaconDevice.majorId,
-      minorId : req.body.beaconDevice.minorId
+    beaconDevice: {
+      majorId: req.body.beaconDevice.majorId,
+      minorId: req.body.beaconDevice.minorId
     }
-  })
+  };
+
+  Place.create(newPlace)
     .then(function(place) {
       res.status(200).json({id: place.id});
     }, function(err) {

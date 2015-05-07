@@ -1,5 +1,7 @@
 'use strict';
 
+require('coffee-script/register');
+
 var express = require('express');
 var kraken = require('kraken-js');
 var options = require('./lib/options')();

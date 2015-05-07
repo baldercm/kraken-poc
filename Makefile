@@ -12,6 +12,9 @@ start:
 test: pretest
 	NODE_ENV=test $(NODE_MODULES)/mocha
 
+test-travis: pretest
+	NODE_ENV=test $(NODE_MODULES)/istanbul cover $(NODE_MODULES)/_mocha --report lcovonly
+
 dev: pretest
 	NODE_ENV=test $(NODE_MODULES)/nodemon --exec $(NODE_MODULES)/mocha --reporter min
 

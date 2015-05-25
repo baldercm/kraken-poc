@@ -75,11 +75,11 @@ describe('Places E2E', function () {
           .get('/places/anyWrongId')
           .auth('noderest', 'secret')
           .accept('application/json')
-          .expect(function(res) {
+          .end(function(err, res) {
             expect(res.status).to.equal(400);
             expect(res.type).to.match(/json/);
-          })
-          .end(done);
+            done();
+          });
       });
     });
   });
@@ -131,11 +131,11 @@ describe('Places E2E', function () {
           .get('/places?latitude=invalid&longitude=invalid')
           .auth('noderest', 'secret')
           .accept('application/json')
-          .expect(function(res) {
+          .end(function(err, res) {
             expect(res.status).to.equal(400);
             expect(res.type).to.match(/json/);
-          })
-          .end(done);
+            done();
+          });
       });
     });
   });

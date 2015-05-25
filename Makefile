@@ -1,7 +1,11 @@
 # kraken-poc Makefile
 
+# paths
 NODE_MODULES=./node_modules/.bin
 
+# commands
+MOCHA=NODE_ENV=test $(NODE_MODULES)/mocha
+ISTANBUL=NODE_ENV=test $(NODE_MODULES)/istanbul cover $(NODE_MODULES)/_mocha
 
 default: test
 
@@ -12,17 +16,23 @@ dev: pretest
 	NODE_ENV=test $(NODE_MODULES)/nodemon --exec $(NODE_MODULES)/mocha --reporter min
 
 test: pretest
-	NODE_ENV=test $(NODE_MODULES)/mocha
+	$(MOCHA)
+
+test-unit: pretest
+	$(MOCHA) --invert --grep E2E
+
+test-e2e: pretest
+	$(MOCHA) --grep E2E
 
 test-docker: jshint
-	NODE_ENV=docker $(NODE_MODULES)/mocha
+	$(MOCHA)
 
 test-travis: pretest
-	NODE_ENV=test $(NODE_MODULES)/istanbul cover $(NODE_MODULES)/_mocha --report lcovonly
+	$(ISTANBUL) --report lcovonly
 
 coverage: pretest
 	rm -Rf coverage
-	NODE_ENV=test $(NODE_MODULES)/istanbul cover $(NODE_MODULES)/_mocha
+	$(ISTANBUL)
 
 pretest: jshint preparetestdb
 

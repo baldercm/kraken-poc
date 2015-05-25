@@ -3,11 +3,18 @@
 var mongoose = require('mongoose');
 
 var placeSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, required: true },
   shortDescription: String,
   location: [Number],
-  beaconDevice: mongoose.Schema.Types.Mixed
+  beaconDevice: {
+    majorId: { type: String, validate: validateBeaconDeviceMajorId },
+    minorId: String
+  }
 });
+
+function validateBeaconDeviceMajorId (majorId) {
+  return /[a-z]{2}[0-9]{5}/.test(majorId);
+}
 
 placeSchema.index({ location: '2d' });
 
@@ -25,5 +32,6 @@ placeSchema.set('toJSON', {
 
 var Place = mongoose.model('Place', placeSchema, 'place');
 
-module.exports.Place = Place;
-module.exports.placeSchema = placeSchema;
+exports.Place = Place;
+exports.placeSchema = placeSchema;
+exports.validateBeaconDeviceMajorId = validateBeaconDeviceMajorId;

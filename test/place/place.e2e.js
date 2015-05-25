@@ -21,8 +21,8 @@ describe('Places E2E', function () {
         name: 'Place 1',
         location: [40.00, 30.00],
         beaconDevice : {
-          majorId : '1234',
-          minorId : '2345'
+          majorId : 'ab123',
+          minorId : 'bc234'
         }
       },
       { name: 'Place 2', location: [40.00, 30.00] },
@@ -140,12 +140,12 @@ describe('Places E2E', function () {
     });
   });
 
-  describe('GET /places?beaconMajorId=1234', function() {
+  describe('GET /places?beaconMajorId=ab123', function() {
 
     context('on valid query', function() {
       it('should get the place with the beacon majorId', function(done) {
         request(mock)
-          .get('/places?beaconMajorId=1234')
+          .get('/places?beaconMajorId=ab123')
           .auth('noderest', 'secret')
           .accept('application/json')
           .expect(function(res) {
@@ -181,28 +181,8 @@ describe('Places E2E', function () {
 
   describe('POST /places', function() {
 
-    context('on valid query', function() {
-      it('should get the place with the beacon majorId', function(done) {
-        request(mock)
-          .get('/places?beaconMajorId=1234')
-          .auth('noderest', 'secret')
-          .accept('application/json')
-          .expect(function(res) {
-            expect(res.status).to.equal(200);
-            expect(res.type).to.match(/json/);
-            expect(res.body).to.be.instanceof(Array);
-            expect(res.body.length).to.equal(1);
-
-            var placeNames = _.pluck(res.body, 'name');
-            expect(placeNames).to.include.members(['Place 1']);
-            expect(placeNames).not.to.include.members(['Place 2', 'Place 3', 'Place 4']);
-          })
-          .end(done);
-      });
-    });
-
-    context('on wrong majorId', function() {
-      it('should get an empty array', function(done) {
+    context('on valid place', function() {
+      it('should save the place', function(done) {
         request(mock)
           .post('/places')
           .send({
@@ -221,24 +201,32 @@ describe('Places E2E', function () {
             expect(res.type).to.match(/json/);
             expect(res.body.id).to.be.defined;
           })
+          .end(done);
+      });
+    });
+
+    context('on wrong majorId', function() {
+      it('should get an error', function(done) {
+        request(mock)
+          .post('/places')
+          .send({
+            name: '',
+            latitude: 1.23,
+            longitude: 2.34,
+            beaconDevice: {
+              majorId: '',
+              minorId: 'cd456'
+            }
+          })
+          .auth('noderest', 'secret')
+          .accept('application/json')
           .end(function(err, res) {
-            var id = res.body.id;
-            request(mock)
-              .get('/places/' + id)
-              .accept('application/json')
-              .expect(function(res) {
-                expect(res.status).to.equal(200);
-                expect(res.type).to.match(/json/);
-                expect(res.body).to.contain({
-                  id: id,
-                  name: 'New Place',
-                  latitude: 1.23,
-                  longitude: 2.34
-                });
-                expect(res.body.beaconDevice.majorId).to.equal('ab123');
-                expect(res.body.beaconDevice.minorId).to.equal('cd456');
-              })
-              .end(done);
+            expect(res.status).to.equal(400);
+            expect(res.type).to.match(/json/);
+            expect(res.body.error).to.exist;
+            expect(res.body.error.errors).to.contain.key('name');
+            expect(res.body.error.errors).to.contain.key('beaconDevice.majorId');
+            done();
           });
       });
     });

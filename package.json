@@ -32,7 +32,7 @@
     "replace": "^0.3.0",
     "sinon": "^1.14.1",
     "sinon-chai": "^2.7.0",
-    "supertest": "^0.15.0"
+    "supertest": "^1.0.1"
   },
   "generator-kraken": {
     "version": "1.1.2",

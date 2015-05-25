@@ -13,7 +13,7 @@ var placeSchema = new mongoose.Schema({
 });
 
 function validateBeaconDeviceMajorId (majorId) {
-  return /[a-z]{2}[0-9]{5}/.test(majorId);
+  return /[a-z]{2}[0-9]{3}/.test(majorId);
 }
 
 placeSchema.index({ location: '2d' });
